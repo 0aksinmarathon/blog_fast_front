@@ -57,9 +57,12 @@ function LoginPageF(props) {
     const login = async (emailAddress, password) => {
         console.debug('login')
         try{
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/token/`, {email: emailAddress, password: password})
+            const params = new URLSearchParams();
+            params.append('username', emailAddress)
+            params.append('password', password)
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/token`, params)
             console.debug(res)
-            localStorage.setItem('Authorization', `JWT ${res.data.token}`)
+            localStorage.setItem('Authorization', `Bearer ${res.data.access_token}`)
             history.push('/')
         } catch (error) {
             console.debug(error)

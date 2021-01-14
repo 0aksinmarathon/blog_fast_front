@@ -6,7 +6,7 @@ export default function Articles() {
     const [articles, setArticles] = useState();
 
     useEffect(async () => {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/article`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/article/`);
         setArticles(res.data)
         return () => console.log('unmounting...');
     }, [])
